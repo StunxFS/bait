@@ -398,18 +398,27 @@ fun (mut p Parser) name_expr(lang ast.Language) ast.Expr{
 		p.next()
 		p.next()
 	}
+
 	if p.tok.val == 'map' {
 		return p.map_init()
 	}
+
 	if p.next_tok.kind == .lpar {
 		return p.fun_call(lang)
 	}
-	if p.is_struct_possible and p.next_tok.kind == .lcur {
-		return p.struct_init()
+
+	capitalised := p.tok.val[0].is_capital() and not p.tok.val.is_upper()
+
+	if p.is_struct_possible and (p.next_tok.kind == .lcur or p.next_tok.kind == .lbr) {
+		if capitalised or ['array', 'map', 'string'].contains(p.tok.val) {
+			return p.struct_init()
+		}
 	}
-	if p.next_tok.kind == .dot and p.tok.val[0].is_capital() and not p.tok.val.is_upper() {
+
+	if capitalised and p.next_tok.kind == .dot {
 		return p.enum_val(true)
 	}
+
 	return p.ident(lang)
 }
 
