@@ -11,6 +11,7 @@ _unreleased_
 - Check that concrete types for each generic type match
 - Generate concrete functions on both backends
 - Fix invalid error that a generic type is private
+- Fix string conversion of generic types
 
 ### Error Checks
 - If conditions must be of type bool
