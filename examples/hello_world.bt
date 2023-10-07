@@ -1,3 +1,16 @@
+struct Foo[T]{
+	x T
+}
+
 fun main() {
-	println('hello world')
+	f := Foo[i32]{
+		x = 1
+	}
+
+	e := Foo[string]{
+		x = 'hi'
+	}
+
+	println(f.x)
+	// println(e.x)
 }

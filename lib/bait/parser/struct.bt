@@ -90,6 +90,7 @@ fun (mut p Parser) struct_decl()ast.StructDecl{
 		pkg = p.pkg_name
 		info = ast.StructInfo{
 			fields = fields
+			generic_names = generic_names
 		}
 	}
 	typ := p.table.register_sym(tsym)
@@ -100,7 +101,6 @@ fun (mut p Parser) struct_decl()ast.StructDecl{
 		typ = typ
 		fields = fields
 		pos = pos
-		generic_names = generic_names
 	}
 }
 

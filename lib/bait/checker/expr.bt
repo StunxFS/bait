@@ -392,6 +392,12 @@ fun (mut c Checker) selector_expr(mut node ast.SelectorExpr) ast.Type {
 			c.error('field ${sym.name}.${node.field_name} is private', node.pos)
 		}
 
+		fsym := c.table.get_sym(field.typ)
+		if fsym.kind == .generic {
+			// info := sym.info as ast.StructInfo
+			// return info.concrete_types[info.generic_names.index(fsym.name)]
+		}
+
 		return field.typ
 	}
 
