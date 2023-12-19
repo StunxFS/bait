@@ -18,6 +18,12 @@ _unreleased_
 - Generate concrete functions on both backends
 - Fix invalid error that a generic type is private
 
+### Import System
+- Look for imports next to the compiled file first
+- Raise errors in case of
+  - Imported package does not exist
+  - No files belong to the imported package
+
 ### Error and Type Checks
 - If conditions must be of type bool
 - Cannot assign from a void function call
@@ -28,9 +34,7 @@ _unreleased_
   - `-` on non-numeric types
   - `not` on non-bool types
 - Respect return type of overloaded methods
-- Import related errors in case of
-  - Imported package does not exist
-  - No files belong to imported package
+- Fix invalid error for struct fields with a function type
 - Fix false-positive error if a method shares a name with a function defined before
 - Reduce noisy errors in the following cases
   - Assign to undefined ident
@@ -40,7 +44,8 @@ _unreleased_
 
 ### Language Interoperability
 - _[JS]_ Implement native strings `js'my str'`
-- _[JS]_Various fixes related to interfaces
+- _[JS]_ Add support for declaring structs, methods, enums and type aliases
+- _[JS]_ Various fixes related to interfaces
 
 ### Pointers
 - Add pointer dereferencing: `^my_ptr`
@@ -61,8 +66,9 @@ _unreleased_
     - New field `oks` to check number of successful runs
     - Add capbility to use `build_all_in_root` for directories
   - InOutRunner
-    - Output tests work on windows now (internal path and line break normalization)
+    - Output tests work on windows now (path and line break normalization)
     - Handle skips for lib tests
+- Move compiler tests from `lib/bait/tests/` into `tests/`
 
 ### Standard Library
 - Add quite minimal `time` package
@@ -75,16 +81,15 @@ _unreleased_
   - Add `input(prompt) string` function _[JS backend]_
   - `is_dir(path)`: Return false if path does not exist
   - Fix js error with `mkdir()` and `mkdir_all()` if path already exists
+- Add absolutly minimal `time` package
 
 ### Other Changes
+- Windows: Fix multiline strings
 - Implement real `if` and `match` expressions _[JS]_
-- Add support for float literals _[JS backend]_
+- Add support for float literals _[JS]_
 - checker: Fix scope of smartcasted if conditions
 - gen: Escape reserved JS keywords in the `for ... in` loop
-- Imports: Look for imports next to the respective file first
-- Interop: Support for declaring JS structs, methods, enums and type aliases
 - parser: Fix prefix expr precedence
-- Move compiler tests from `lib/bait/tests/` into `tests/`
 - Various refactorings
 - Documentation improvements
 
